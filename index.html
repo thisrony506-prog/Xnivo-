@@ -1,0 +1,3706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="6a97888e-site-verification" content="311199be31da7b968e52ae2c0a5bd898">
+  <!-- Comprehensive SEO Meta Tags -->
+  <title>Xnivo — Stream 4K Movies & Trending Entertainment</title>
+  <meta name="description" content="Watch high-definition 4K movies, trending releases, and master streams with multi-subtitles and surround sound audio on Xnivo.">
+  <meta name="keywords" content="Xnivo, free 4K movies, stream movies online, HD movie player, watch movies online, master stream">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Xnivo">
+  <link rel="canonical" href="https://xnivo.com/">
+
+  <!-- Open Graph / Facebook / WhatsApp SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Xnivo">
+  <meta property="og:title" content="Xnivo — Stream 4K Movies & Trending Entertainment">
+  <meta property="og:description" content="Stream high-definition 4K movies, trending releases, and master streams online on Xnivo.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200&q=80">
+  <meta property="og:url" content="https://xnivo.com/">
+
+  <!-- Twitter Card SEO -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Xnivo — Stream 4K Movies & Trending Entertainment">
+  <meta name="twitter:description" content="Stream high-definition 4K movies, trending releases, and master streams online on Xnivo.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200&q=80">
+
+  <!-- Fast Asset & Image Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://commondatastorage.googleapis.com">
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <style>
+    :root {
+      --bg: #090a0f;
+      --surface: #12141c;
+      --surface-elevated: #1a1d28;
+      --surface-glass: rgba(18, 20, 28, 0.78);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.14);
+      --accent: #ff2e3b;
+      --accent-glow: rgba(255, 46, 59, 0.35);
+      --accent-gradient: linear-gradient(135deg, #ff2e3b 0%, #ff525d 100%);
+      --gold-gradient: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+      --text: #f8fafc;
+      --text-sub: #94a3b8;
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.5;
+      padding-bottom: 70px;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #232736;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #33394d;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 62px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: 1.5px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .logo span {
+      color: var(--accent);
+    }
+    .logo-badge {
+      font-family: var(--font-main);
+      font-size: 9px;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      color: #fff;
+      padding: 2px 5px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      margin-left: 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-icon-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .header-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--border-light);
+    }
+    .notification-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* TOP & BOTTOM AD BANNERS (320x50) */
+    .top-ad, .bottom-ad {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(10, 11, 16, 0.9);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      min-height: 50px;
+    }
+    .bottom-ad {
+      border-top: 1px solid var(--border);
+      border-bottom: none;
+      margin-top: 24px;
+    }
+    .ad-inject-container {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* APP CONTAINER & PAGES */
+    .app-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+
+    /* HERO SPOTLIGHT SLIDER */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      transition: background-image 0.6s ease;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 10, 15, 0.2) 0%, rgba(9, 10, 15, 0.75) 60%, rgba(9, 10, 15, 0.98) 100%),
+                  linear-gradient(90deg, rgba(9, 10, 15, 0.85) 0%, transparent 60%);
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      z-index: 2;
+    }
+    .hero-badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 46, 59, 0.2);
+      color: #ff525d;
+      border: 1px solid rgba(255, 46, 59, 0.35);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+    .hero-desc {
+      font-size: 13px;
+      color: var(--text-sub);
+      max-width: 600px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .hero-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-main);
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(255, 46, 59, 0.5);
+    }
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(10px);
+    }
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      gap: 6px;
+      z-index: 3;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dot.active {
+      width: 24px;
+      background: var(--accent);
+    }
+
+    /* 16:9 CINEMA VIDEO-SIZED AD SHOWCASE */
+    .home-video-stream-ad {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0d0e14;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    .home-video-stream-ad-top {
+      padding: 10px 16px;
+      background: rgba(26, 29, 40, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .home-video-stream-ad-title {
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #fff;
+    }
+    .home-video-stream-ad-tag {
+      font-size: 9px;
+      font-weight: 800;
+      background: rgba(255, 46, 59, 0.15);
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 46, 59, 0.3);
+    }
+    .home-video-stream-ad-frame {
+      width: 100%;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 0;
+      background: #07080c;
+    }
+
+    /* SEARCH BAR */
+    .search-box-wrap {
+      position: relative;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .search-input {
+      width: 100%;
+      height: 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0 44px 0 44px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 16px rgba(255, 46, 59, 0.2);
+    }
+    .search-icon-left {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-sub);
+      font-size: 14px;
+    }
+    .search-clear-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      cursor: pointer;
+      font-size: 14px;
+      display: none;
+    }
+
+    /* CATEGORIES FILTER BAR */
+    .carousel-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar {
+      display: none;
+    }
+    .filter-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-sub);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .filter-chip:hover {
+      background: var(--surface-elevated);
+      color: #fff;
+      border-color: var(--border-light);
+    }
+    .filter-chip.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      background: rgba(18, 20, 28, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 11px;
+    }
+    .carousel-nav-btn.prev { left: -10px; }
+    .carousel-nav-btn.next { right: -10px; }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title i {
+      color: var(--accent);
+    }
+    .section-meta-count {
+      font-size: 12px;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    /* MOVIE GRID */
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 16px;
+    }
+
+    /* POSTER CARD */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-light);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    .card-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      background: #181b26;
+      overflow: hidden;
+    }
+    .card-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .card:hover .card-thumb-wrap img {
+      transform: scale(1.06);
+    }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+    }
+    .card-top {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2;
+    }
+    .badge {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .badge-gold {
+      background: var(--gold-gradient);
+      color: #000;
+      font-weight: 900;
+      border: none;
+    }
+    .card-play-hover {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+    .card:hover .card-play-hover {
+      opacity: 1;
+    }
+    .card-play-hover i {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+    .card-info {
+      padding: 10px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-meta {
+      font-size: 11px;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* IN-GRID VIDEO-SIZED REAL ADSTERRA AD CARD */
+    .video-ad-card {
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      background: #0e1017;
+      cursor: pointer;
+      position: relative;
+    }
+    .video-ad-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+    }
+    .video-ad-card .card-thumb-wrap {
+      background: #08090d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .video-ad-card .badge-ad {
+      background: #f59e0b;
+      color: #000;
+      font-size: 9px;
+      font-weight: 900;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .ad-pulse-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #f59e0b;
+      margin-right: 4px;
+      box-shadow: 0 0 8px #f59e0b;
+    }
+
+    /* =======================================================
+       CINEMATIC PLAYER MODAL
+       ======================================================= */
+    .player-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 9, 0.94);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow-y: auto;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .player-modal.active {
+      display: flex;
+    }
+    .player-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--surface-glass);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+    }
+    .player-brand-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .player-server-pill {
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      padding: 3px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .player-server-pill span.dot {
+      width: 5px;
+      height: 5px;
+      background: #10b981;
+      border-radius: 50%;
+    }
+    .close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Video Player Stage */
+    .player-stage {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #000;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+    }
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+
+    /* Custom Video Player Overlay & Controls */
+    .custom-controls-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 14px 18px;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+      cursor: pointer;
+    }
+    .custom-controls-overlay.hidden-controls {
+      opacity: 0;
+    }
+    .custom-controls-overlay.hidden-controls .player-top-bar-overlay,
+    .custom-controls-overlay.hidden-controls .controls-bottom-bar {
+      pointer-events: none;
+    }
+    .player-top-bar-overlay {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .player-top-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .player-center-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: rgba(255, 46, 59, 0.95);
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 25px rgba(255, 46, 59, 0.7);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      z-index: 15;
+    }
+    .player-center-play-btn:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .controls-bottom-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+    }
+    .progress-bar-filled {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      width: 0%;
+      position: relative;
+    }
+    .progress-bar-filled::after {
+      content: '';
+      position: absolute;
+      right: -5px;
+      top: -3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 6px rgba(0,0,0,0.5);
+    }
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .video-ctrl-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ctrl-btn {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .time-display {
+      font-size: 12px;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+    .speed-badge-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--border-light);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* Fallback overlay */
+    .no-video-overlay {
+      position: absolute;
+      inset: 0;
+      background: #090a0f;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      z-index: 6;
+    }
+    .no-video-overlay i {
+      font-size: 40px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    /* VIDEO BUFFER OVERLAY (THUMBNAIL IMAGE + CENTERED SPINNER ONLY) */
+    .video-buffer-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: none;
+    }
+    .video-buffer-overlay.video-playing {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .video-buffer-thumb-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      background: #000;
+    }
+    .video-buffer-scrim {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+    }
+    .video-buffer-spinner-wrap {
+      position: relative;
+      z-index: 2;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-buffer-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3.5px solid rgba(255, 255, 255, 0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: bufferSpin 0.8s linear infinite;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    @keyframes bufferSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Player Content & Spec Matrix */
+    .player-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 18px 40px 18px;
+      width: 100%;
+    }
+    .server-switcher-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0 18px 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .server-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .server-btn.active {
+      background: rgba(255, 46, 59, 0.15);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* YOUTUBE-STYLE EXPANDABLE INFO CONTAINER (DIRECTLY UNDER TITLE WITH SEE MORE) */
+    .player-details-box {
+      background: #0e111a;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 8px 0 16px 0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .player-details-box:hover {
+      background: #121622;
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .player-details-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .player-quick-summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+    .quick-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .quick-meta-dot {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 8px;
+    }
+    .see-more-action-text {
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .player-details-box:hover .see-more-action-text {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .player-details-body {
+      display: none;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: default;
+    }
+    .player-details-box.expanded .player-details-body {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+    .player-details-box.expanded .see-more-action-text {
+      background: rgba(229, 9, 20, 0.15);
+      color: var(--accent);
+    }
+
+    /* SLEEK SIDE-BY-SIDE WATCH & SHARE ACTION ROW */
+    .player-action-row {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0 20px 0;
+      align-items: stretch;
+    }
+    .action-btn-pill {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      font-family: inherit;
+      letter-spacing: 0.2px;
+    }
+    .action-btn-pill i {
+      font-size: 15px;
+    }
+    .btn-watch-stream {
+      background: linear-gradient(135deg, #e50914 0%, #ff2e3b 100%);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(229, 9, 20, 0.4);
+    }
+    .btn-watch-stream:hover {
+      background: linear-gradient(135deg, #f01420 0%, #ff4753 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(229, 9, 20, 0.6);
+    }
+    .btn-share-movie {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+    }
+    .btn-share-movie:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* SPEC MATRIX DASHBOARD */
+    .movie-meta-dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .spec-card {
+      background: #11141e;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: border-color 0.2s;
+    }
+    .spec-card:hover {
+      border-color: var(--border-light);
+    }
+    .spec-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .spec-label i {
+      color: var(--accent);
+    }
+    .spec-value {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* SYNOPSIS BOX */
+    .synopsis-box {
+      background: #11141e;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+    }
+    .synopsis-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .synopsis-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .genre-tag-cluster {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .genre-tag-pill {
+      font-size: 10px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      color: #cbd5e1;
+    }
+    .synopsis-text {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* CINEMA AD BILLBOARDS */
+    .cinema-ad-billboard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 20px;
+    }
+    .cinema-ad-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cinema-ad-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: #f59e0b;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .cinema-ad-notice {
+      font-size: 10px;
+      color: var(--text-sub);
+    }
+    .cinema-ad-native-wrapper {
+      width: 100%;
+      min-height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .cinema-ad-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* RECOMMENDED ROW */
+    .related-row-wrap {
+      position: relative;
+    }
+    .related-row {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .related-row::-webkit-scrollbar {
+      display: none;
+    }
+    .related-card {
+      flex: 0 0 130px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .related-card:hover {
+      transform: translateY(-3px);
+    }
+    .related-card img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .related-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #fff;
+    }
+
+    /* BACK TO TOP */
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface-glass);
+      border: 1px solid var(--border-light);
+      color: #fff;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 99;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      transition: all 0.2s;
+    }
+    .back-to-top-btn.visible {
+      display: flex;
+    }
+
+    /* TOAST */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      background: rgba(26, 29, 40, 0.95);
+      color: #fff;
+      border: 1px solid var(--border-light);
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      animation: toastFade 2.5s forwards;
+    }
+    @keyframes toastFade {
+      0% { opacity: 0; transform: translateY(10px); }
+      15% { opacity: 1; transform: translateY(0); }
+      85% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-10px); }
+    }
+
+    .hidden-smartlink {
+      display: none;
+    }
+
+    /* TIMED 30-40 SEC INTERVAL SINGLE SOCIAL BAR AD */
+    .timed-social-bar-container {
+      position: fixed;
+      bottom: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 460px;
+      z-index: 9999;
+      background: rgba(15, 18, 29, 0.96);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 14px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75);
+      padding: 10px 14px;
+      transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .timed-social-bar-container.active {
+      bottom: 20px;
+    }
+    .social-bar-close-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      cursor: pointer;
+      margin-left: 4px;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .social-bar-close-btn:hover {
+      background: rgba(255, 46, 59, 0.25);
+      border-color: #ff2e3b;
+      color: #fff;
+    }
+
+    @media (max-width: 640px) {
+      .timed-social-bar-container {
+        width: calc(100% - 20px);
+      }
+      .timed-social-bar-container.active {
+        bottom: 12px;
+      }
+    }
+
+
+
+    @media (max-width: 640px) {
+      .hero {
+        height: 350px;
+      }
+      .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .feed-ad-16-9-slot {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+      .adsterra-16-9-feed-container {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        margin: 10px 0;
+        border-radius: 8px;
+      }
+      .pro-actions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* RECENT SEARCHES DROPDOWN */
+    .recent-searches-dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+      z-index: 100;
+      display: none;
+      overflow: hidden;
+      animation: fadeInDown 0.18s ease forwards;
+    }
+    .recent-searches-dropdown.show {
+      display: block;
+    }
+    .recent-searches-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .recent-searches-clear-all {
+      color: var(--accent);
+      background: transparent;
+      border: none;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    .recent-searches-clear-all:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    .recent-searches-list {
+      list-style: none;
+      margin: 0;
+      padding: 4px 0;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+    .recent-search-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      color: #e2e8f0;
+      font-size: 13px;
+    }
+    .recent-search-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+    .recent-search-query-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      overflow: hidden;
+    }
+    .recent-search-query-wrap i {
+      color: var(--text-sub);
+      font-size: 12px;
+    }
+    .recent-search-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .recent-search-remove-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+    .recent-search-remove-btn:hover {
+      color: var(--accent);
+    }
+    .recent-searches-empty {
+      padding: 16px 14px;
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* CUSTOM SOCIAL SHARE OVERLAY */
+    .share-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: fadeIn 0.2s ease forwards;
+    }
+    .share-overlay.active {
+      display: flex;
+    }
+    .share-dialog {
+      background: #131622;
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 440px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 46, 59, 0.15);
+      animation: zoomInModal 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .share-dialog-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .share-dialog-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .share-dialog-title i {
+      color: var(--accent);
+    }
+    .share-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .share-close-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .share-preview-card {
+      display: flex;
+      gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .share-preview-thumb {
+      width: 60px;
+      height: 75px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: #181b26;
+    }
+    .share-preview-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .share-preview-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 6px;
+    }
+    .share-preview-meta {
+      font-size: 11px;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .share-social-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 20px;
+    }
+    .share-social-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 6px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+      text-decoration: none;
+      color: #fff;
+    }
+    .share-social-btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--border-light);
+    }
+    .share-icon-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+    }
+    .share-social-btn.whatsapp .share-icon-circle {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    }
+    .share-social-btn.telegram .share-icon-circle {
+      background: linear-gradient(135deg, #2AABEE, #229ED9);
+      box-shadow: 0 4px 14px rgba(42, 171, 238, 0.35);
+    }
+    .share-social-btn.twitter .share-icon-circle {
+      background: linear-gradient(135deg, #1d1d1f, #000000);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+    }
+    .share-social-btn.facebook .share-icon-circle {
+      background: linear-gradient(135deg, #1877F2, #0D65D9);
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.35);
+    }
+    .share-social-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+    .share-copy-section {
+      padding: 0 20px 20px 20px;
+    }
+    .share-copy-box {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px 4px 4px 12px;
+      gap: 8px;
+    }
+    .share-copy-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 12px;
+      outline: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .share-copy-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .share-copy-btn:hover {
+      opacity: 0.9;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomInModal {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div class="logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+      Xn<span>ivo</span>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <button class="header-icon-btn" onclick="focusSearch()" title="Search Movies">
+      <i class="fa-solid fa-search"></i>
+    </button>
+    <button class="header-icon-btn" id="notifBellBtn" onclick="togglePushNotifications()" title="Enable Push Notifications">
+      <i class="fa-solid fa-bell"></i>
+      <span class="notification-dot"></span>
+    </button>
+  </div>
+</header>
+
+<!-- TOP AD (320x50) -->
+<div class="top-ad">
+  <div id="top-ad-container" class="ad-inject-container" style="width:320px;height:50px">
+    <script type="text/javascript">
+    atOptions = {
+      'key' : '3a6d76d177ac3ab40cd26d58595a677b',
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
+    </script>
+    <script type="text/javascript" src="https://www.highperformanceformat.com/3a6d76d177ac3ab40cd26d58595a677b/invoke.js"></script>
+  </div>
+</div>
+
+<main class="app-container">
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="homePage">
+    
+    <!-- HERO SPOTLIGHT SLIDER -->
+    <div class="hero" id="heroSection">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-badge-wrap">
+          <div class="hero-badge" id="heroBadge">
+            <i class="fa-solid fa-fire"></i> #1 Trending Spotlight
+          </div>
+        </div>
+        <h1 class="hero-title" id="heroTitle">Connecting to Xnivo...</h1>
+        <p class="hero-desc" id="heroDesc">Explore high-definition movies, trending releases, and binge-worthy entertainment anytime, anywhere.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" id="heroWatchBtn">
+            <i class="fa-solid fa-play"></i> Watch Now
+          </button>
+          <button class="btn btn-glass" id="heroInfoBtn">
+            <i class="fa-solid fa-circle-info"></i> More Details
+          </button>
+        </div>
+      </div>
+      <div class="slider-dots" id="sliderDots"></div>
+    </div>
+
+    <!-- 16:9 CINEMA VIDEO-SIZED AD SHOWCASE -->
+    <div class="home-video-stream-ad">
+      <div class="home-video-stream-ad-top">
+        <div class="home-video-stream-ad-title">
+          <i class="fa-solid fa-clapperboard" style="color:var(--accent)"></i>
+          <span>Sponsored Cinema Stream Showcase</span>
+          <span class="home-video-stream-ad-tag">4K ULTRA HD</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-sub);display:flex;align-items:center;gap:6px">
+          <span class="dot" style="background:#10b981;box-shadow:0 0 8px #10b981"></span> Live Partner
+        </div>
+      </div>
+      <div class="home-video-stream-ad-frame">
+        <div class="ad-728x90-container" style="margin:0;background:transparent;border:none;">
+          <script type="text/javascript">
+          atOptions = {
+            'key' : '9986170006ff8ed9a27b7bd2923b2dc7',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+          };
+          </script>
+          <script type="text/javascript" src="https://www.highperformanceformat.com/9986170006ff8ed9a27b7bd2923b2dc7/invoke.js"></script>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTANT CINEMA SEARCH BAR -->
+    <div class="search-box-wrap" id="searchBoxWrap">
+      <i class="fa-solid fa-search search-icon-left"></i>
+      <input type="text" class="search-input" placeholder="Search by title, actor, or genre..." id="searchInput" autocomplete="off">
+      <button class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
+
+      <!-- RECENT SEARCHES DROPDOWN (LAST 5 SEARCHES) -->
+      <div class="recent-searches-dropdown" id="recentSearchesDropdown">
+        <div class="recent-searches-header">
+          <span><i class="fa-solid fa-clock-rotate-left"></i> Recent Searches</span>
+          <button class="recent-searches-clear-all" onclick="clearAllRecentSearches(event)">Clear All</button>
+        </div>
+        <div class="recent-searches-list" id="recentSearchesList"></div>
+      </div>
+    </div>
+
+    <!-- SECTION TITLE -->
+    <div class="section-header">
+      <div class="section-title">
+        <i class="fa-solid fa-bolt"></i> Trending Movies
+      </div>
+      <div class="section-meta-count" id="homeMovieCount"></div>
+    </div>
+
+    <!-- MOVIE GRID -->
+    <div class="movie-grid" id="movieGrid">
+      <div class="loading-spinner" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-sub);">
+        <i class="fa-solid fa-circle-notch fa-spin"></i> Loading Movies from Cloud...
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- CINEMATIC PLAYER MODAL WITH CUSTOM ULTRA HD CONTROLS -->
+<div class="player-modal" id="playerModal">
+  <div class="player-header">
+    <div class="player-brand-title">
+      <span style="color:var(--accent)"><i class="fa-solid fa-clapperboard"></i></span>
+      <span id="playerHeaderTitle">Xnivo Stream</span>
+      <div class="player-server-pill"><span class="dot"></span> ONLINE</div>
+    </div>
+    <button class="close-btn" onclick="closePlayer()" title="Close Player">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <div class="player-stage">
+    <div class="video-wrapper" id="videoWrapper">
+      <video id="mainVideo" playsinline preload="metadata">
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+
+      <!-- Cinematic Buffer Overlay: Displays Movie Thumbnail + Centered Loading Spinner Only -->
+      <div class="video-buffer-overlay" id="videoBufferOverlay">
+        <img class="video-buffer-thumb-img" id="videoBufferThumbImg" src="" alt="Thumbnail">
+        <div class="video-buffer-scrim"></div>
+        <div class="video-buffer-spinner-wrap" id="videoBufferSpinnerWrap">
+          <div class="video-buffer-spinner"></div>
+        </div>
+      </div>
+
+      <!-- Custom Video Controls Overlay -->
+      <div class="custom-controls-overlay" id="customControls" onmousemove="handlePlayerMouseMove()" onclick="handleOverlayClick(event)">
+        <div class="player-top-bar-overlay">
+          <span class="player-top-title" id="playerTopTitle">Movie Title</span>
+          <span class="badge badge-gold" id="playerTopQuality">4K ULTRA HD</span>
+        </div>
+
+        <button class="player-center-play-btn" id="centerPlayBtn" onclick="togglePlayPause(event)" title="Play / Pause">
+          <i class="fa-solid fa-play" id="centerPlayIcon"></i>
+        </button>
+
+        <div class="controls-bottom-bar">
+          <div class="progress-bar-container" id="progressBar" onclick="seekVideo(event)">
+            <div class="progress-bar-filled" id="progressFilled"></div>
+          </div>
+
+          <div class="controls-row">
+            <div class="video-ctrl-group">
+              <button class="ctrl-btn" onclick="togglePlayPause(event)" title="Play/Pause (Space)">
+                <i class="fa-solid fa-play" id="playBtnIcon"></i>
+              </button>
+              <button class="ctrl-btn" onclick="skipTime(-10)" title="Rewind 10s">
+                <i class="fa-solid fa-rotate-left"></i>
+              </button>
+              <button class="ctrl-btn" onclick="skipTime(10)" title="Forward 10s">
+                <i class="fa-solid fa-rotate-right"></i>
+              </button>
+              <div class="video-ctrl-group" style="gap:6px">
+                <button class="ctrl-btn" onclick="toggleMute()" title="Mute/Unmute (M)">
+                  <i class="fa-solid fa-volume-high" id="volumeIcon"></i>
+                </button>
+              </div>
+              <div class="time-display">
+                <span id="currentTimeText">00:00</span> / <span id="durationText">00:00</span>
+              </div>
+            </div>
+
+            <div class="video-ctrl-group">
+              <button class="speed-badge-btn" id="speedBtn" onclick="cyclePlaybackSpeed()" title="Playback Speed">
+                1.0x
+              </button>
+              <button class="ctrl-btn" onclick="toggleFullscreen()" title="Fullscreen (F)">
+                <i class="fa-solid fa-expand" id="fullscreenIcon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="player-content">
+    <!-- MOVIE TITLE -->
+    <h2 class="player-title" id="movieTitle" style="font-family:var(--font-display);font-size:clamp(20px, 3.5vw, 26px);font-weight:900;margin-bottom:8px;color:#fff;letter-spacing:-0.5px;">Movie Title</h2>
+    
+    <!-- YOUTUBE-STYLE DETAILS & SEE MORE ACCORDION (RIGHT AFTER TITLE) -->
+    <div class="player-details-box" id="playerDetailsBox" onclick="toggleDetailsBox(event)">
+      <!-- Collapsed Quick Summary Bar -->
+      <div class="player-details-header">
+        <div class="player-quick-summary">
+          <span class="quick-meta-item"><i class="fa-solid fa-eye" style="color:var(--accent);font-size:11px;"></i> <span id="pQuickRating">7,829</span> Views</span>
+          <span class="quick-meta-dot"><i class="fa-solid fa-circle"></i></span>
+          <span class="quick-meta-item"><i class="fa-solid fa-calendar-days" style="color:var(--accent);font-size:11px;"></i> <span id="pQuickYear">2024</span></span>
+          <span class="quick-meta-dot"><i class="fa-solid fa-circle"></i></span>
+          <span class="quick-meta-item"><i class="fa-solid fa-tv" style="color:var(--accent);font-size:11px;"></i> <span id="pQuickQuality">4K UHD</span></span>
+        </div>
+        <div class="see-more-action-text" id="detailsToggleAction">
+          <span id="detailsToggleText">...See more</span>
+          <i class="fa-solid fa-chevron-down" id="detailsToggleIcon" style="font-size:10px;"></i>
+        </div>
+      </div>
+
+      <!-- Expanded Spec Matrix, Tags & Storyline -->
+      <div class="player-details-body" id="playerDetailsBody">
+        <!-- SPEC MATRIX DASHBOARD -->
+        <div class="movie-meta-dashboard" id="movieMeta">
+          <div class="spec-card">
+            <div class="spec-label"><i class="fa-solid fa-tv"></i> Video Res</div>
+            <div class="spec-value" id="pQuality">4K UHD HDR</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label"><i class="fa-solid fa-eye"></i> Audience</div>
+            <div class="spec-value"><span id="pRating">7,829</span> Views</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label"><i class="fa-solid fa-calendar-days"></i> Release</div>
+            <div class="spec-value" id="pYear">2024</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label"><i class="fa-solid fa-closed-captioning"></i> Subtitles</div>
+            <div class="spec-value">Multi-Sub</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label"><i class="fa-solid fa-volume-high"></i> Audio Tech</div>
+            <div class="spec-value">Dolby 5.1</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label"><i class="fa-solid fa-shield-halved"></i> Rating</div>
+            <div class="spec-value" id="pAgeRating">PG-13</div>
+          </div>
+        </div>
+
+        <!-- STORYLINE & SYNOPSIS -->
+        <div class="synopsis-box">
+          <div class="synopsis-header">
+            <div class="synopsis-title">
+              <i class="fa-solid fa-align-left"></i> Storyline & Synopsis
+            </div>
+            <div class="genre-tag-cluster" id="genreTagCluster">
+              <span class="genre-tag-pill" id="pGenre">CINEMA MASTER</span>
+              <span class="genre-tag-pill">HDR10+</span>
+              <span class="genre-tag-pill">Surround</span>
+            </div>
+          </div>
+          <p class="synopsis-text" id="movieDesc">Experience high-definition master cinema streaming with surround sound capability.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLEEK SIDE-BY-SIDE WATCH & SHARE ACTION BUTTONS -->
+    <div class="player-action-row">
+      <button class="action-btn-pill btn-watch-stream" onclick="triggerSmartLink(event)" title="Watch High-Speed Master Stream">
+        <i class="fa-solid fa-play"></i>
+        <span>Watch Stream</span>
+      </button>
+
+      <button class="action-btn-pill btn-share-movie" onclick="shareMovie()" title="Share Link & Social Recommendation">
+        <i class="fa-solid fa-share-nodes"></i>
+        <span>Share</span>
+      </button>
+    </div>
+
+    <!-- REAL ADSTERRA LIVE SPONSORED BANNER -->
+    <div class="cinema-ad-billboard" style="margin:18px 0 24px 0;background:#0d0f17;border:1px solid rgba(245,158,11,0.35);border-radius:12px;overflow:hidden;padding:0;">
+      <div style="background:rgba(245,158,11,0.08);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(245,158,11,0.2);">
+        <div style="font-size:11px;font-weight:800;color:#f59e0b;display:flex;align-items:center;gap:6px;">
+          <i class="fa-solid fa-rectangle-ad"></i> SPONSORED ADVERTISEMENT
+        </div>
+        <div style="font-size:10px;color:#94a3b8;font-weight:700;">Live Stream Sponsor</div>
+      </div>
+      <div style="padding:16px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#06070a;min-height:260px;">
+        <iframe 
+          title="Sponsored Advertisement"
+          srcdoc="<!DOCTYPE html><html><head><meta charset='utf-8'><style>body{margin:0;padding:0;background:transparent;display:flex;align-items:center;justify-content:center;overflow:hidden;}</style></head><body><script type='text/javascript'>atOptions={'key':'e30883a8ed8ae3e6dfb8d28406b32e5a','format':'iframe','height':250,'width':300,'params':{}};</script><script type='text/javascript' src='https://www.highperformanceformat.com/e30883a8ed8ae3e6dfb8d28406b32e5a/invoke.js'></script></body></html>" 
+          width="300" 
+          height="250" 
+          frameborder="0" 
+          scrolling="no" 
+          style="border:none;max-width:100%;border-radius:8px;">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- FULL CINEMA VIDEO FEED (MATCHING HOMEPAGE GRID WITH INTERSPERSED NATIVE ADS) -->
+    <div class="player-feed-section" style="margin-top:10px">
+      <div class="section-header" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div class="section-title" style="font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px;color:#fff;">
+          <i class="fa-solid fa-film" style="color:var(--accent)"></i> More Movies & Feed
+        </div>
+        <div class="section-meta-count" id="playerFeedCount"></div>
+      </div>
+      
+      <!-- Video Grid Matching Homepage Layout with Native Ad Cards Interspersed -->
+      <div class="movie-grid" id="playerMovieGrid" style="margin-top:14px;"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CUSTOM SOCIAL SHARE OVERLAY -->
+<div class="share-overlay" id="shareOverlay" onclick="closeShareModal(event)">
+  <div class="share-dialog" onclick="event.stopPropagation()">
+    <div class="share-dialog-header">
+      <div class="share-dialog-title">
+        <i class="fa-solid fa-share-nodes"></i> Share Movie
+      </div>
+      <button class="share-close-btn" onclick="closeShareModal()" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="share-preview-card">
+      <img id="sharePreviewThumb" class="share-preview-thumb" src="" alt="Thumbnail">
+      <div class="share-preview-info">
+        <div class="share-preview-title" id="sharePreviewTitle">Movie Title</div>
+        <div class="share-preview-meta">
+          <span class="badge badge-gold" id="sharePreviewQuality">4K UHD</span>
+          <span id="sharePreviewYear">2026</span>
+          <span>• Stream Online</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="share-social-grid">
+      <a class="share-social-btn whatsapp" id="shareBtnWhatsapp" href="#" target="_blank" rel="noopener noreferrer" title="Share on WhatsApp">
+        <div class="share-icon-circle">
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <span class="share-social-label">WhatsApp</span>
+      </a>
+
+      <a class="share-social-btn telegram" id="shareBtnTelegram" href="#" target="_blank" rel="noopener noreferrer" title="Share on Telegram">
+        <div class="share-icon-circle">
+          <i class="fa-brands fa-telegram"></i>
+        </div>
+        <span class="share-social-label">Telegram</span>
+      </a>
+
+      <a class="share-social-btn twitter" id="shareBtnTwitter" href="#" target="_blank" rel="noopener noreferrer" title="Share on Twitter / X">
+        <div class="share-icon-circle">
+          <i class="fa-brands fa-x-twitter"></i>
+        </div>
+        <span class="share-social-label">Twitter / X</span>
+      </a>
+
+      <a class="share-social-btn facebook" id="shareBtnFacebook" href="#" target="_blank" rel="noopener noreferrer" title="Share on Facebook">
+        <div class="share-icon-circle">
+          <i class="fa-brands fa-facebook"></i>
+        </div>
+        <span class="share-social-label">Facebook</span>
+      </a>
+
+      <div class="share-social-btn native" id="shareBtnNative" onclick="nativeSystemShare()" title="More Apps & Share Sheet">
+        <div class="share-icon-circle" style="background:linear-gradient(135deg, #f59e0b, #3b82f6)">
+          <i class="fa-solid fa-share-nodes"></i>
+        </div>
+        <span class="share-social-label">More Apps</span>
+      </div>
+    </div>
+
+    <div class="share-copy-section">
+      <div class="share-copy-box">
+        <i class="fa-solid fa-link" style="color:var(--text-sub);font-size:12px;"></i>
+        <input type="text" class="share-copy-input" id="shareCopyInput" readonly>
+        <button class="share-copy-btn" onclick="copyShareLink()">
+          <i class="fa-solid fa-copy"></i> Copy Link
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BACK TO TOP FLOATING BUTTON -->
+<button class="back-to-top-btn" id="backToTopBtn" onclick="scrollToTop()" title="Scroll to Top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- BOTTOM AD (320x50) -->
+<div class="bottom-ad">
+  <div id="bottom-ad-container" class="ad-inject-container" style="width:320px;height:50px">
+    <script type="text/javascript">
+    atOptions = {
+      'key' : '3a6d76d177ac3ab40cd26d58595a677b',
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
+    </script>
+    <script type="text/javascript" src="https://www.highperformanceformat.com/3a6d76d177ac3ab40cd26d58595a677b/invoke.js"></script>
+  </div>
+</div>
+
+<!-- SINGLE TIMED SOCIAL BAR AD (SHOWS ONCE EVERY 35-40 SECONDS) -->
+<div class="timed-social-bar-container" id="timedSocialBarWidget" onclick="handleSocialBarClick(event)">
+  <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg, #f59e0b, #ff2e3b);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0;">
+    <i class="fa-solid fa-bell"></i>
+  </div>
+  <div style="flex:1;min-width:0;">
+    <div style="font-weight:800;font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">🔥 4K Cinema Partner Offer</div>
+    <div style="font-size:11px;color:#cbd5e1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Tap to watch high-speed master stream now!</div>
+  </div>
+  <div style="font-size:11px;font-weight:800;color:#f59e0b;background:rgba(245,158,11,0.18);padding:5px 10px;border-radius:8px;white-space:nowrap;flex-shrink:0;">
+    Watch <i class="fa-solid fa-arrow-right"></i>
+  </div>
+  <button class="social-bar-close-btn" onclick="dismissSocialBar(event)" title="Close Ad">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<a id="smartLinkAnchor" class="hidden-smartlink" href="https://www.effectivecpmnetwork.com/e3psgtze?key=a7e51a63cace225b20af6c95c3b67b25" target="_blank" rel="noopener noreferrer"></a>
+
+<!-- Popunder Script (Global) -->
+<script src="https://pl27781123.effectivecpmnetwork.com/2d/c5/6b/2dc56b5690ae24de64c26e8a7dd48eaf.js"></script>
+
+<!-- APPLICATION JAVASCRIPT -->
+<script>
+// Global Error & Promise Rejection Handlers (Protects against third-party ad script errors)
+window.addEventListener('error', (event) => {
+  if (event && event.message && (event.message === 'Script error.' || event.message.includes('Script error'))) {
+    console.warn("External script error suppressed safely:", event.message);
+    if (typeof event.preventDefault === 'function') event.preventDefault();
+    return true;
+  }
+}, true);
+
+window.addEventListener('unhandledrejection', (event) => {
+  if (event && event.reason) {
+    console.warn("Handled promise rejection:", event.reason);
+  }
+  if (typeof event.preventDefault === 'function') event.preventDefault();
+});
+
+// ====== FIREBASE INITIALIZATION ======
+const firebaseConfig = {
+  apiKey: "AIzaSyBfwFZGAyWNb6k8KvdDNBFO2aODH1Fbmd4",
+  authDomain: "movie-website-85123.firebaseapp.com",
+  projectId: "movie-website-85123",
+  storageBucket: "movie-website-85123.firebasestorage.app",
+  messagingSenderId: "289743469153",
+  appId: "1:289743469153:web:5caeb0e111adb536db8820",
+  measurementId: "G-7L0R0R2LHF"
+};
+
+let db = null;
+try {
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+} catch (e) {
+  console.warn("Firebase Init fallback:", e);
+}
+
+// Fallback high-quality catalog if Firebase is connecting or newly initialized
+const sampleMovies = [
+  {
+    id: "sample-1",
+    title: "Dune: Part Two",
+    desc: "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family in this epic continuation.",
+    thumb: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80",
+    quality: "4K UHD",
+    views: 148920,
+    year: "2026",
+    category: "sci-fi",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+  },
+  {
+    id: "sample-2",
+    title: "Cyberpunk Odyssey",
+    desc: "In a neon-drenched metropolis, an operative must retrieve a sentient quantum drive before private security eliminates the witness.",
+    thumb: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80",
+    quality: "4K UHD",
+    views: 98450,
+    year: "2026",
+    category: "action",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+  },
+  {
+    id: "sample-3",
+    title: "The Midnight Shadow",
+    desc: "A detective unravels a supernatural criminal network lurking beneath Victorian streets after an impossible museum heist.",
+    thumb: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80",
+    quality: "HD",
+    views: 74200,
+    year: "2025",
+    category: "horror",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+  },
+  {
+    id: "sample-4",
+    title: "Interstellar Horizon",
+    desc: "A crew of deep-space pioneers journeys through a newly discovered wormhole in search of a future home for mankind.",
+    thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+    quality: "4K UHD",
+    views: 215400,
+    year: "2026",
+    category: "sci-fi",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+  },
+  {
+    id: "sample-5",
+    title: "Echoes of the Coliseum",
+    desc: "Betrayed and stripped of his birthright, a rogue gladiator leads a rebellion against an empire on the brink of civil war.",
+    thumb: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80",
+    quality: "1080p",
+    views: 120650,
+    year: "2026",
+    category: "action",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4"
+  },
+  {
+    id: "sample-6",
+    title: "Neon Velocity",
+    desc: "High-octane underground drift racers discover their modified engines run on confidential experimental fuel.",
+    thumb: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800&q=80",
+    quality: "HD",
+    views: 64100,
+    year: "2025",
+    category: "action",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4"
+  }
+];
+
+// Alternate streaming server sources
+const serverSources = {
+  1: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  2: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+  3: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+};
+
+// ====== GLOBAL STATE ======
+let allMovies = [];
+let activeSliders = [];
+let currentSlideIndex = 0;
+let sliderInterval = null;
+let currentCategory = 'all';
+let currentMovieId = null;
+let currentServerIndex = 1;
+
+// Video player state
+const video = document.getElementById('mainVideo');
+let controlsTimeout = null;
+let playbackSpeeds = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
+let currentSpeedIndex = 2; // 1.0x
+
+// ====== TOAST NOTIFICATION ======
+function showToast(message) {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--accent)"></i> <span>${message}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.remove();
+  }, 2500);
+}
+
+// ====== SMOOTH SCROLLING HELPERS ======
+function scrollContainer(containerId, distance) {
+  const el = document.getElementById(containerId);
+  if (el) {
+    el.scrollBy({ left: distance, behavior: 'smooth' });
+  }
+}
+
+// Enable horizontal mouse wheel scroll on carousels
+document.querySelectorAll('.filter-bar, .related-row, .server-switcher-bar').forEach(container => {
+  container.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      container.scrollBy({ left: e.deltaY * 1.5, behavior: 'smooth' });
+    }
+  }, { passive: false });
+});
+
+// Back to Top functionality
+window.addEventListener('scroll', () => {
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  if (backToTopBtn) {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ====== SLIDER SYSTEM ======
+function setupHeroSlider() {
+  const sliderDots = document.getElementById('sliderDots');
+  if (activeSliders.length === 0) {
+    if (allMovies.length > 0) {
+      activeSliders = allMovies.slice(0, 4).map(m => ({
+        type: 'movie',
+        movieId: m.id
+      }));
+    } else {
+      document.getElementById('heroTitle').innerText = "Discover on Xnivo";
+      return;
+    }
+  }
+
+  const dotsHtml = activeSliders.map((_, i) => 
+    `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`
+  ).join('');
+  sliderDots.innerHTML = dotsHtml;
+
+  if (sliderInterval) clearInterval(sliderInterval);
+  sliderInterval = setInterval(() => {
+    currentSlideIndex = (currentSlideIndex + 1) % activeSliders.length;
+    updateHeroView();
+  }, 6000);
+
+  updateHeroView();
+}
+
+function goToSlide(index) {
+  currentSlideIndex = index;
+  updateHeroView();
+  if (sliderInterval) clearInterval(sliderInterval);
+  sliderInterval = setInterval(() => {
+    currentSlideIndex = (currentSlideIndex + 1) % activeSliders.length;
+    updateHeroView();
+  }, 6000);
+}
+
+function updateHeroView() {
+  if (activeSliders.length === 0) return;
+  const slide = activeSliders[currentSlideIndex];
+  const heroSection = document.getElementById('heroSection');
+  const heroBadge = document.getElementById('heroBadge');
+  const heroTitle = document.getElementById('heroTitle');
+  const heroDesc = document.getElementById('heroDesc');
+  const heroWatchBtn = document.getElementById('heroWatchBtn');
+  const heroInfoBtn = document.getElementById('heroInfoBtn');
+
+  document.querySelectorAll('.slider-dots .dot').forEach((d, i) => 
+    d.classList.toggle('active', i === currentSlideIndex)
+  );
+
+  if (slide.type === 'movie') {
+    const movie = allMovies.find(m => m.id === slide.movieId) || allMovies[0];
+    if (!movie) return;
+
+    heroSection.style.backgroundImage = `url('${movie.thumb}')`;
+    heroBadge.className = 'hero-badge';
+    heroBadge.innerHTML = `<i class="fa-solid fa-fire"></i> #${currentSlideIndex + 1} Trending on Xnivo`;
+    heroTitle.innerText = movie.title;
+    heroDesc.innerText = movie.desc || 'Stream instantly in stunning Ultra HD audio and video.';
+
+    heroWatchBtn.onclick = () => openMovie(movie.id);
+    heroInfoBtn.style.display = 'inline-flex';
+    heroInfoBtn.onclick = () => openMovie(movie.id);
+  } else if (slide.type === 'ad') {
+    if (slide.adImg) heroSection.style.backgroundImage = `url('${slide.adImg}')`;
+    heroBadge.className = 'hero-badge sponsored';
+    heroBadge.innerHTML = `<i class="fa-solid fa-star"></i> Sponsored Spotlight`;
+    heroTitle.innerText = slide.adTitle || 'Exclusive Offer';
+    heroDesc.innerText = slide.adDesc || 'Unlock premium perks and member-only rewards today!';
+
+    heroWatchBtn.onclick = () => {
+      if (slide.adLink) window.open(slide.adLink, '_blank');
+      triggerSmartLink(null);
+    };
+    heroInfoBtn.style.display = 'none';
+  }
+}
+
+// ====== LOAD DATA FROM FIREBASE ======
+// ====== LOAD DATA FROM FIREBASE (REAL-TIME DIRECT SYNC) ======
+// ====== LOAD DATA FROM FIREBASE ======
+async function loadWebsiteData() {
+  let loadedFromFirebase = false;
+  
+  if (db) {
+    try {
+      const postsSnap = await db.collection('posts').where('status', '==', 'published').get();
+      if (!postsSnap.empty) {
+        allMovies = postsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        loadedFromFirebase = true;
+      }
+
+      const sliderSnap = await db.collection('sliders').where('active', '==', true).get();
+      if (!sliderSnap.empty) {
+        activeSliders = sliderSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      }
+    } catch (error) {
+      console.warn("Firestore fetch error, utilizing catalog:", error);
+    }
+  }
+
+  if (!loadedFromFirebase || allMovies.length === 0) {
+    allMovies = sampleMovies;
+    activeSliders = [
+      { type: 'movie', movieId: 'sample-1' },
+      { type: 'movie', movieId: 'sample-2' },
+      { type: 'movie', movieId: 'sample-4' }
+    ];
+  }
+
+  setupHeroSlider();
+  applyFilters();
+  checkUrlRoute();
+  subscribeRealtimePosts();
+}
+
+// ====== CARD HTML BUILDER ======
+function cardHTML(m) {
+  const viewsDisplay = m.views ? (typeof m.views === 'number' ? m.views.toLocaleString() : m.views) : '10K+';
+
+  return `
+    <div class="card" onclick="openMovie('${m.id}')">
+      <div class="card-thumb-wrap">
+        <div class="card-overlay"></div>
+        <div class="card-top">
+          <div class="badge ${m.quality && m.quality.includes('4K') ? 'badge-gold' : ''}">${m.quality || 'HD'}</div>
+        </div>
+        <img src="${m.thumb}" alt="${m.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80'">
+        <div class="card-play-hover">
+          <i class="fa-solid fa-play"></i>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-title" title="${m.title}">${m.title}</div>
+        <div class="card-meta">
+          <span class="card-views"><i class="fa-solid fa-eye" style="font-size:10px"></i> ${viewsDisplay}</span>
+          <span>${m.year || '2026'}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ====== NATIVE CINEMA PROMO AD MOVIES (LOOK IDENTICAL TO REGULAR MOVIES) ======
+const nativeAdMovies = [
+  {
+    title: "Shadow Assassin: Red Legacy",
+    thumb: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800&q=80",
+    quality: "4K UHD",
+    views: "98,420",
+    year: "2026"
+  },
+  {
+    title: "Cyberpunk 2099: Neon Horizon",
+    thumb: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80",
+    quality: "4K HDR",
+    views: "154,200",
+    year: "2026"
+  },
+  {
+    title: "The Continental: High Table Wars",
+    thumb: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80",
+    quality: "4K UHD",
+    views: "210,850",
+    year: "2025"
+  },
+  {
+    title: "Interstellar Odyssey: Deep Space",
+    thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+    quality: "4K IMAX",
+    views: "87,300",
+    year: "2026"
+  },
+  {
+    title: "Dragon Blade: The Immortal Dynasty",
+    thumb: "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80",
+    quality: "4K HDR",
+    views: "119,640",
+    year: "2026"
+  },
+  {
+    title: "Midnight Speed: Drift Velocity",
+    thumb: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&q=80",
+    quality: "4K UHD",
+    views: "176,900",
+    year: "2026"
+  }
+];
+
+// ====== NATIVE AD CARD THAT LOOKS EXACTLY LIKE A NORMAL MOVIE VIDEO WITH REAL ADS ======
+function nativeMovieAdCardHTML(adIdx = 0) {
+  const item = nativeAdMovies[adIdx % nativeAdMovies.length];
+  const adHtmlContent = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><style>*{margin:0;padding:0;box-sizing:border-box;}body{background:#08090d;color:#cbd5e1;font-family:-apple-system,BlinkMacSystemFont,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100vw;height:100vh;overflow:hidden;}#container-53beb71c073e27e6a44ae16721195175{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}</style></head><body><div id="container-53beb71c073e27e6a44ae16721195175"></div><script async="async" data-cfasync="false" src="https://pl27781142.effectivecpmnetwork.com/53beb71c073e27e6a44ae16721195175/invoke.js"><\/script></body></html>`;
+
+  return `
+    <div class="card video-ad-card" onclick="triggerSmartLink(event)" title="${item.title}" style="cursor:pointer;">
+      <div class="card-thumb-wrap" style="position:relative;background:#08090d;overflow:hidden;">
+        <div class="card-top">
+          <div class="badge badge-gold">${item.quality}</div>
+        </div>
+        <iframe 
+          class="adsterra-iframe-target"
+          id="adsterra-native-frame-${adIdx}"
+          srcdoc="${adHtmlContent.replace(/"/g, '&quot;')}"
+          style="width:100%; height:100%; min-height:100%; border:none; overflow:hidden; background:#08090d;" 
+          scrolling="no" 
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-title" title="${item.title}">${item.title}</div>
+        <div class="card-meta">
+          <span class="card-views"><i class="fa-solid fa-eye" style="font-size:10px"></i> ${item.views}</span>
+          <span>${item.year}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ====== IN-GRID VIDEO-SIZED REAL ADSTERRA SPONSORED AD CARD BUILDER ======
+function adCardHTML(index = 1) {
+  const adHtmlContent = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><style>*{margin:0;padding:0;box-sizing:border-box;}body{background:#08090d;color:#cbd5e1;font-family:-apple-system,BlinkMacSystemFont,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100vw;height:100vh;overflow:hidden;}#container-53beb71c073e27e6a44ae16721195175{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}</style></head><body><div id="container-53beb71c073e27e6a44ae16721195175"></div><script async="async" data-cfasync="false" src="https://pl27781142.effectivecpmnetwork.com/53beb71c073e27e6a44ae16721195175/invoke.js"><\/script></body></html>`;
+
+  return `
+    <div class="card video-ad-card" onclick="triggerSmartLink(event)">
+      <div class="card-thumb-wrap" style="position:relative;background:#08090d;overflow:hidden;">
+        <div class="card-top">
+          <div class="badge badge-ad">SPONSORED</div>
+        </div>
+        <iframe 
+          class="adsterra-iframe-target"
+          id="adsterra-feed-frame-${index}"
+          srcdoc="${adHtmlContent.replace(/"/g, '&quot;')}"
+          style="width:100%; height:100%; min-height:100%; border:none; overflow:hidden; background:#08090d;" 
+          scrolling="no" 
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-title" title="Sponsored Cinema Stream">Sponsored Cinema Stream</div>
+        <div class="card-meta">
+          <span class="card-views" style="color:#f59e0b"><i class="fa-solid fa-bolt"></i> Live Ad</span>
+          <span style="color:#94a3b8;font-size:10px;font-weight:700">SPONSORED</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function initInFeedAds() {
+  // srcdoc handles sandbox loading directly and safely
+}
+
+// ====== RENDER GRID WITH REGULAR-LOOKING ADS & SPONSORED ADS ======
+function renderGrid(id, data, emptyMessage = 'No Movies Found') {
+  const grid = document.getElementById(id);
+  if (!grid) return;
+  if (!data || data.length === 0) {
+    grid.innerHTML = `
+      <div class="empty" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-sub);">
+        <i class="fa-solid fa-film" style="font-size:32px;margin-bottom:8px;"></i>
+        <div>${emptyMessage}</div>
+      </div>
+    `;
+    return;
+  }
+
+  let html = '';
+  let sponsoredAdCount = 1;
+  let nativeAdCount = 0;
+  data.forEach((m, idx) => {
+    html += cardHTML(m);
+    
+    // Inject video-styled native ad card (looks like regular video)
+    if (idx === 1 || idx === 4 || (idx > 7 && idx % 4 === 0)) {
+      html += nativeMovieAdCardHTML(nativeAdCount);
+      nativeAdCount++;
+    }
+
+    // Inject real Adsterra SPONSORED ad card
+    if (idx === 3 || idx === 7 || (idx > 7 && (idx - 3) % 6 === 0)) {
+      html += adCardHTML(sponsoredAdCount);
+      sponsoredAdCount++;
+    }
+  });
+
+  grid.innerHTML = html;
+  
+  if (id === 'movieGrid') {
+    initInFeedAds();
+  }
+}
+
+// ====== CATEGORY & SEARCH FILTERING ======
+function filterByCategory(category, element) {
+  currentCategory = category;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  if (element) {
+    element.classList.add('active');
+    element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  let filtered = allMovies;
+
+  if (currentCategory !== 'all') {
+    filtered = filtered.filter(m => 
+      (m.category && m.category.toLowerCase().includes(currentCategory)) ||
+      (m.desc && m.desc.toLowerCase().includes(currentCategory)) ||
+      (m.title && m.title.toLowerCase().includes(currentCategory))
+    );
+  }
+
+  if (q !== '') {
+    filtered = filtered.filter(m => 
+      (m.title && m.title.toLowerCase().includes(q)) ||
+      (m.desc && m.desc.toLowerCase().includes(q)) ||
+      (m.category && m.category.toLowerCase().includes(q)) ||
+      (m.year && m.year.toString().includes(q))
+    );
+  }
+
+  const countEl = document.getElementById('homeMovieCount');
+  if (countEl) countEl.innerText = `${filtered.length} titles`;
+
+  const emptyMsg = q ? `No results found for "${q}". Try another keyword!` : `No ${currentCategory} movies available right now.`;
+  renderGrid('movieGrid', filtered, emptyMsg);
+}
+
+function focusSearch() {
+  const searchWrap = document.getElementById('searchBoxWrap');
+  if (searchInput) {
+    if (searchWrap) {
+      searchWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    searchInput.focus();
+    if (typeof showRecentSearchesDropdown === 'function') {
+      showRecentSearchesDropdown();
+    }
+  }
+}
+
+// ====== PUSH NOTIFICATION ENGINE ======
+function togglePushNotifications() {
+  if (!('Notification' in window)) {
+    showToast('⚠️ Push notifications are not supported on this browser/device.');
+    return;
+  }
+
+  if (Notification.permission === 'granted') {
+    showToast('🔔 Push Notifications are already ENABLED! You will get alerts for new 4K movies.');
+    sendBrowserNotification(
+      'Xnivo Push Notifications Active 🎬',
+      'You are subscribed to instant movie drop alerts on Xnivo.'
+    );
+  } else if (Notification.permission === 'denied') {
+    showToast('⚠️ Notification permission is blocked in browser settings. Please enable notifications in site settings.');
+  } else {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        localStorage.setItem('xnivo_push_enabled', 'true');
+        showToast('✅ Push Notifications Permission GRANTED!');
+        
+        const dot = document.querySelector('.notification-dot');
+        if (dot) dot.style.background = '#22c55e';
+
+        sendBrowserNotification(
+          'Welcome to Xnivo Alerts! 🎬',
+          'Permission granted! You will now receive push notifications when new movies are posted.'
+        );
+      } else {
+        showToast('ℹ️ Notification permission was not granted.');
+      }
+    });
+  }
+}
+
+function sendBrowserNotification(title, body, movieUrl = null) {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+
+  try {
+    const notif = new Notification(title, {
+      body: body,
+      icon: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=192&q=80',
+      badge: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=96&q=80',
+      tag: 'xnivo-alert-' + Date.now(),
+      requireInteraction: false
+    });
+
+    notif.onclick = function(event) {
+      event.preventDefault();
+      window.focus();
+      if (movieUrl) {
+        window.location.href = movieUrl;
+      }
+      notif.close();
+    };
+  } catch (e) {
+    console.warn("Notification dispatch notice:", e);
+  }
+}
+
+// Real-time listener for newly published movies to trigger push notifications
+let isInitialPostLoad = true;
+function subscribeRealtimePosts() {
+  if (!db) return;
+  try {
+    db.collection('posts').where('status', '==', 'published').onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type === 'added' && !isInitialPostLoad) {
+          const newPost = { id: change.doc.id, ...change.doc.data() };
+          showToast(`🎬 New 4K Movie Posted: "${newPost.title || 'New Movie'}"!`);
+          
+          if (Notification.permission === 'granted') {
+            const baseUrl = window.location.origin + window.location.pathname;
+            const watchUrl = `${baseUrl}#watch?id=${encodeURIComponent(newPost.id)}`;
+            sendBrowserNotification(
+              `🎬 New Movie Alert: ${newPost.title}`,
+              `"${newPost.title}" has just been posted on Xnivo. Stream in 4K now!`,
+              watchUrl
+            );
+          }
+        }
+      });
+      isInitialPostLoad = false;
+    }, err => console.warn("Realtime listener notice:", err));
+  } catch (e) {
+    console.warn("Realtime setup notice:", e);
+  }
+}
+
+// ====== SMARTLINK TRIGGER ======
+function triggerSmartLink(event) {
+  if (event) event.stopPropagation();
+  const anchor = document.getElementById('smartLinkAnchor');
+  if (anchor) anchor.click();
+}
+
+// =================================================================
+// ====== CUSTOM VIDEO PLAYER CONTROLS & PLAYBACK ENGINE ======
+// =================================================================
+
+function formatTime(seconds) {
+  if (isNaN(seconds) || seconds < 0) return '00:00';
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+  if (h > 0) {
+    return `${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+  }
+  return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function handlePlayerMouseMove() {
+  const controls = document.getElementById('customControls');
+  if (!controls) return;
+  controls.classList.remove('hidden-controls');
+  if (controlsTimeout) clearTimeout(controlsTimeout);
+
+  if (!video.paused) {
+    controlsTimeout = setTimeout(() => {
+      controls.classList.add('hidden-controls');
+    }, 2800);
+  }
+}
+
+let isPlayIntent = false;
+let isVideoActivelyPlaying = false;
+
+function renderPlayerState() {
+  const overlay = document.getElementById('videoBufferOverlay');
+  const spinnerWrap = document.getElementById('videoBufferSpinnerWrap');
+  const centerPlayBtn = document.getElementById('centerPlayBtn');
+  const playBtnIcon = document.getElementById('playBtnIcon');
+  const centerPlayIcon = document.getElementById('centerPlayIcon');
+  const thumbImg = document.getElementById('videoBufferThumbImg');
+
+  // Update thumbnail image from current movie
+  const movie = allMovies.find(m => m.id === currentMovieId);
+  if (thumbImg && movie && movie.thumb && thumbImg.src !== movie.thumb) {
+    thumbImg.src = movie.thumb;
+  }
+
+  if (isVideoActivelyPlaying && video && !video.paused && !video.ended) {
+    // 1. ACTUAL VIDEO IS PLAYING: Hide poster overlay, show video
+    if (overlay) overlay.classList.add('video-playing');
+    if (spinnerWrap) spinnerWrap.style.display = 'none';
+    if (centerPlayBtn) {
+      centerPlayBtn.style.opacity = '0';
+      centerPlayBtn.style.pointerEvents = 'none';
+    }
+    if (playBtnIcon) playBtnIcon.className = 'fa-solid fa-pause';
+    if (centerPlayIcon) centerPlayIcon.className = 'fa-solid fa-pause';
+  } else if (isPlayIntent) {
+    // 2. TURNED ON (PLAY / BUFFERING): Show thumbnail poster + Show loading spinner
+    if (overlay) overlay.classList.remove('video-playing');
+    if (spinnerWrap) spinnerWrap.style.display = 'flex';
+    if (centerPlayBtn) {
+      centerPlayBtn.style.opacity = '0';
+      centerPlayBtn.style.pointerEvents = 'none';
+    }
+    if (playBtnIcon) playBtnIcon.className = 'fa-solid fa-pause';
+    if (centerPlayIcon) centerPlayIcon.className = 'fa-solid fa-pause';
+  } else {
+    // 3. TURNED OFF (PAUSED / NO VIDEO): Show thumbnail poster + Stop spinner + Show Center Play button
+    if (overlay) overlay.classList.remove('video-playing');
+    if (spinnerWrap) spinnerWrap.style.display = 'none';
+    if (centerPlayBtn) {
+      centerPlayBtn.style.opacity = '1';
+      centerPlayBtn.style.pointerEvents = 'auto';
+    }
+    if (playBtnIcon) playBtnIcon.className = 'fa-solid fa-play';
+    if (centerPlayIcon) centerPlayIcon.className = 'fa-solid fa-play';
+  }
+}
+
+function togglePlayPause(e) {
+  if (e && typeof e.stopPropagation === 'function') {
+    e.stopPropagation();
+  }
+  if (!video) return;
+
+  if (isPlayIntent) {
+    // === TURN OFF / PAUSE: Stop video and loading immediately ===
+    isPlayIntent = false;
+    isVideoActivelyPlaying = false;
+    try {
+      video.pause();
+    } catch (err) {}
+    renderPlayerState();
+  } else {
+    // === TURN ON / PLAY & LOAD ===
+    isPlayIntent = true;
+    isVideoActivelyPlaying = false;
+    renderPlayerState();
+
+    const movie = allMovies.find(m => m.id === currentMovieId);
+    const targetUrl = (movie && movie.video && movie.video.trim() !== '') 
+      ? (currentServerIndex === 1 ? movie.video : (serverSources[currentServerIndex] || movie.video))
+      : (serverSources[currentServerIndex] || serverSources[1]);
+
+    if (targetUrl && (!video.src || video.src === '' || video.src === window.location.href)) {
+      video.src = targetUrl;
+      video.load();
+    }
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        if (!isPlayIntent) {
+          video.pause();
+          isVideoActivelyPlaying = false;
+          renderPlayerState();
+        }
+      }).catch(err => {
+        console.warn("Video play pending / gesture required:", err);
+      });
+    }
+  }
+}
+
+function handleOverlayClick(event) {
+  if (!event) return;
+  // Ignore clicks on control buttons or progress bar
+  if (event.target.closest('button') || event.target.closest('.progress-bar-container') || event.target.closest('.controls-bottom-bar')) {
+    return;
+  }
+  togglePlayPause(event);
+}
+
+function skipTime(seconds) {
+  if (!video) return;
+  video.currentTime = Math.max(0, Math.min(video.duration || 0, video.currentTime + seconds));
+  showToast(`${seconds > 0 ? '+' : ''}${seconds}s`);
+}
+
+function toggleMute() {
+  if (!video) return;
+  video.muted = !video.muted;
+  const icon = document.getElementById('volumeIcon');
+  if (icon) {
+    icon.className = video.muted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+  }
+  showToast(video.muted ? 'Muted' : 'Unmuted');
+}
+
+function cyclePlaybackSpeed() {
+  if (!video) return;
+  currentSpeedIndex = (currentSpeedIndex + 1) % playbackSpeeds.length;
+  const newSpeed = playbackSpeeds[currentSpeedIndex];
+  video.playbackRate = newSpeed;
+  const speedBtn = document.getElementById('speedBtn');
+  if (speedBtn) speedBtn.innerText = `${newSpeed}x`;
+  showToast(`Speed: ${newSpeed}x`);
+}
+
+function toggleFullscreen() {
+  const wrapper = document.getElementById('videoWrapper');
+  if (!wrapper) return;
+
+  if (!document.fullscreenElement) {
+    if (wrapper.requestFullscreen) {
+      wrapper.requestFullscreen();
+    } else if (wrapper.webkitRequestFullscreen) {
+      wrapper.webkitRequestFullscreen();
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+function seekVideo(event) {
+  if (!video || !video.duration) return;
+  const rect = event.currentTarget.getBoundingClientRect();
+  const clickX = event.clientX - rect.left;
+  const width = rect.width;
+  const percentage = clickX / width;
+  video.currentTime = percentage * video.duration;
+}
+
+if (video) {
+  video.addEventListener('timeupdate', () => {
+    if (!video.duration) return;
+    const pct = (video.currentTime / video.duration) * 100;
+    const progressFilled = document.getElementById('progressFilled');
+    const currentTimeText = document.getElementById('currentTimeText');
+    const durationText = document.getElementById('durationText');
+
+    if (progressFilled) progressFilled.style.width = `${pct}%`;
+    if (currentTimeText) currentTimeText.innerText = formatTime(video.currentTime);
+    if (durationText) durationText.innerText = formatTime(video.duration);
+  });
+
+  video.addEventListener('loadstart', () => {
+    if (isPlayIntent) {
+      isVideoActivelyPlaying = false;
+      renderPlayerState();
+    }
+  });
+
+  video.addEventListener('waiting', () => {
+    if (isPlayIntent) {
+      isVideoActivelyPlaying = false;
+      renderPlayerState();
+    }
+  });
+
+  video.addEventListener('seeking', () => {
+    if (isPlayIntent) {
+      isVideoActivelyPlaying = false;
+      renderPlayerState();
+    }
+  });
+
+  video.addEventListener('canplay', () => {
+    if (isPlayIntent && !video.paused) {
+      isVideoActivelyPlaying = true;
+      renderPlayerState();
+    }
+  });
+
+  video.addEventListener('playing', () => {
+    if (isPlayIntent) {
+      isVideoActivelyPlaying = true;
+      renderPlayerState();
+      handlePlayerMouseMove();
+    } else {
+      video.pause();
+      isVideoActivelyPlaying = false;
+      renderPlayerState();
+    }
+  });
+
+  video.addEventListener('pause', () => {
+    isVideoActivelyPlaying = false;
+    renderPlayerState();
+    const controls = document.getElementById('customControls');
+    if (controls) controls.classList.remove('hidden-controls');
+  });
+
+  video.addEventListener('ended', () => {
+    isPlayIntent = false;
+    isVideoActivelyPlaying = false;
+    renderPlayerState();
+  });
+
+  video.addEventListener('loadedmetadata', () => {
+    const durationText = document.getElementById('durationText');
+    if (durationText) durationText.innerText = formatTime(video.duration);
+  });
+
+  video.addEventListener('error', (e) => {
+    console.warn("Video stream encountered error:", e);
+    isVideoActivelyPlaying = false;
+    if (isPlayIntent) {
+      renderPlayerState();
+    }
+  });
+}
+
+function switchServer(index) {
+  // Server switching disabled as requested
+}
+
+
+// ====== DYNAMIC METADATA & DEEP LINK ROUTING ENGINE ======
+function setMetaContent(propertyOrName, content) {
+  let el = document.querySelector(`meta[property="${propertyOrName}"]`) || document.querySelector(`meta[name="${propertyOrName}"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    if (propertyOrName.startsWith('og:')) {
+      el.setAttribute('property', propertyOrName);
+    } else {
+      el.setAttribute('name', propertyOrName);
+    }
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+function updateMetaTagsForMovie(movie) {
+  const baseUrl = window.location.origin + window.location.pathname;
+  if (!movie) {
+    document.title = "Xnivo — Stream 4K Movies & Trending Entertainment";
+    setMetaContent("og:title", "Xnivo — Stream 4K Movies & Trending Entertainment");
+    setMetaContent("twitter:title", "Xnivo — Stream 4K Movies & Trending Entertainment");
+    setMetaContent("og:description", "Watch high-definition 4K movies, trending releases, and master streams on Xnivo.");
+    setMetaContent("twitter:description", "Watch high-definition 4K movies, trending releases, and master streams on Xnivo.");
+    setMetaContent("og:image", "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200&q=80");
+    setMetaContent("twitter:image", "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200&q=80");
+    setMetaContent("og:url", baseUrl);
+    return;
+  }
+
+  const movieUrl = `${baseUrl}#watch?id=${encodeURIComponent(movie.id)}`;
+  const titleText = `${movie.title} — Watch on Xnivo`;
+  const descText = movie.desc || `Stream ${movie.title} in high-definition 4K with surround sound audio on Xnivo.`;
+  const thumbUrl = movie.thumb || "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200&q=80";
+
+  document.title = `${movie.title} — Xnivo`;
+  setMetaContent("og:title", titleText);
+  setMetaContent("twitter:title", titleText);
+  setMetaContent("og:description", descText);
+  setMetaContent("twitter:description", descText);
+  setMetaContent("og:image", thumbUrl);
+  setMetaContent("twitter:image", thumbUrl);
+  setMetaContent("og:url", movieUrl);
+}
+
+function checkUrlRoute() {
+  const hash = window.location.hash;
+  const searchParams = new URLSearchParams(window.location.search);
+  let movieId = searchParams.get('id') || searchParams.get('v');
+
+  if (!movieId && hash) {
+    if (hash.includes('id=')) {
+      movieId = hash.split('id=')[1].split('&')[0];
+    } else if (hash.startsWith('#watch/')) {
+      movieId = hash.replace('#watch/', '');
+    } else if (hash.startsWith('#') && hash.length > 1) {
+      movieId = hash.substring(1);
+    }
+  }
+
+  if (movieId) {
+    movieId = decodeURIComponent(movieId);
+    const movie = allMovies.find(m => m.id === movieId || m.id === `movie-${movieId}`) ||
+                  sampleMovies.find(m => m.id === movieId || m.id === `movie-${movieId}`);
+    if (movie) {
+      openMovie(movie.id, false);
+      return;
+    }
+  }
+}
+
+window.addEventListener('hashchange', () => {
+  if (!window.location.hash || window.location.hash === '#') {
+    closePlayer(false);
+  } else {
+    checkUrlRoute();
+  }
+});
+
+window.addEventListener('popstate', () => {
+  if (!window.location.hash || window.location.hash === '#') {
+    closePlayer(false);
+  } else {
+    checkUrlRoute();
+  }
+});
+
+// ====== OPEN PLAYER ======
+function openMovie(id, updateHistory = true) {
+  currentMovieId = id;
+  const movie = allMovies.find(m => m.id === id) || sampleMovies.find(m => m.id === id);
+  if (!movie) return;
+
+  // Update URL hash & dynamic SEO/OG meta tags for sharing
+  if (updateHistory) {
+    const targetHash = '#watch?id=' + encodeURIComponent(movie.id);
+    if (window.location.hash !== targetHash) {
+      history.pushState(null, '', targetHash);
+    }
+  }
+  updateMetaTagsForMovie(movie);
+
+  const modal = document.getElementById('playerModal');
+  const headerTitle = document.getElementById('playerHeaderTitle');
+  const playerTopTitle = document.getElementById('playerTopTitle');
+  const playerTopQuality = document.getElementById('playerTopQuality');
+  const movieTitle = document.getElementById('movieTitle');
+  const movieDesc = document.getElementById('movieDesc');
+  const pRating = document.getElementById('pRating');
+  const pYear = document.getElementById('pYear');
+  const pQuality = document.getElementById('pQuality');
+  const pGenre = document.getElementById('pGenre');
+  const pAgeRating = document.getElementById('pAgeRating');
+  const thumbImg = document.getElementById('videoBufferThumbImg');
+
+  const pQuickRating = document.getElementById('pQuickRating');
+  const pQuickYear = document.getElementById('pQuickYear');
+  const pQuickQuality = document.getElementById('pQuickQuality');
+
+  const viewsStr = (movie.views ? (typeof movie.views === 'number' ? movie.views.toLocaleString() : movie.views) : '7,829');
+  const yearStr = movie.year || '2024';
+  const qualityStr = movie.quality || '4K UHD HDR';
+  const genreStr = (movie.category ? movie.category.toUpperCase() : 'CINEMA MASTER');
+
+  if (headerTitle) headerTitle.innerText = `${movie.title} • Stream`;
+  if (playerTopTitle) playerTopTitle.innerText = movie.title;
+  if (playerTopQuality) playerTopQuality.innerText = movie.quality || '4K ULTRA HD';
+  if (movieTitle) movieTitle.innerText = movie.title;
+  if (movieDesc) movieDesc.innerText = movie.desc || 'Experience high-definition master cinema streaming with surround sound capability.';
+  if (pRating) pRating.innerText = viewsStr;
+  if (pYear) pYear.innerText = yearStr;
+  if (pQuality) pQuality.innerText = qualityStr;
+  if (pGenre) pGenre.innerText = genreStr;
+  if (pAgeRating) pAgeRating.innerText = movie.age || 'PG-13';
+
+  if (pQuickRating) pQuickRating.innerText = viewsStr;
+  if (pQuickYear) pQuickYear.innerText = yearStr;
+  if (pQuickQuality) pQuickQuality.innerText = movie.quality ? movie.quality.split(' ')[0] || '4K' : '4K UHD';
+
+  // Reset Details Accordion See More state
+  const detailsBox = document.getElementById('playerDetailsBox');
+  const detailsToggleText = document.getElementById('detailsToggleText');
+  const detailsToggleIcon = document.getElementById('detailsToggleIcon');
+  if (detailsBox) detailsBox.classList.remove('expanded');
+  if (detailsToggleText) detailsToggleText.innerText = '...See more';
+  if (detailsToggleIcon) detailsToggleIcon.className = 'fa-solid fa-chevron-down';
+
+  if (thumbImg && movie.thumb) {
+    thumbImg.src = movie.thumb;
+  }
+  if (video) {
+    video.poster = movie.thumb || '';
+  }
+
+
+  // Turn ON playback attempt: thumbnail + loading spinner
+  isPlayIntent = true;
+  isVideoActivelyPlaying = false;
+  renderPlayerState();
+
+  const streamUrl = (movie.video && movie.video.trim() !== '') ? movie.video : serverSources[1];
+  if (streamUrl) {
+    video.src = streamUrl;
+    video.load();
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        if (!isPlayIntent) {
+          video.pause();
+          isVideoActivelyPlaying = false;
+          renderPlayerState();
+        }
+      }).catch(() => {
+        console.log("Autoplay waiting for user gesture");
+      });
+    }
+  }
+
+  // Load related movies feed
+  loadRelatedMovies(movie);
+
+  modal.classList.add('active');
+  modal.scrollTo({ top: 0, behavior: 'smooth' });
+  document.body.style.overflow = 'hidden';
+}
+
+function toggleDetailsBox(event) {
+  const detailsBox = document.getElementById('playerDetailsBox');
+  const toggleText = document.getElementById('detailsToggleText');
+  const toggleIcon = document.getElementById('detailsToggleIcon');
+  if (!detailsBox) return;
+
+  const isExpanded = detailsBox.classList.toggle('expanded');
+  if (toggleText) {
+    toggleText.innerText = isExpanded ? 'Show less' : '...See more';
+  }
+  if (toggleIcon) {
+    toggleIcon.className = isExpanded ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
+  }
+}
+
+function closePlayer(updateHistory = true) {
+  const modal = document.getElementById('playerModal');
+  isPlayIntent = false;
+  isVideoActivelyPlaying = false;
+  if (video) {
+    video.pause();
+  }
+  renderPlayerState();
+  if (modal) modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+
+  if (updateHistory && window.location.hash && window.location.hash.includes('watch')) {
+    history.pushState(null, '', window.location.pathname + window.location.search);
+  }
+  updateMetaTagsForMovie(null);
+}
+
+// ====== CUSTOM SOCIAL SHARE OVERLAY ======
+function shareMovie() {
+  const movie = allMovies.find(m => m.id === currentMovieId) || sampleMovies.find(m => m.id === currentMovieId) || allMovies[0];
+  if (!movie) return;
+
+  const title = movie.title;
+  const quality = movie.quality || '4K UHD';
+  const year = movie.year || '2026';
+  const thumb = movie.thumb || 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80';
+  
+  const baseUrl = window.location.origin + window.location.pathname;
+  const shareUrl = `${baseUrl}#watch?id=${encodeURIComponent(movie.id)}`;
+  const shareText = `Watch "${title}" (${quality}) in 4K on Xnivo!`;
+
+  const thumbEl = document.getElementById('sharePreviewThumb');
+  const titleEl = document.getElementById('sharePreviewTitle');
+  const qualityEl = document.getElementById('sharePreviewQuality');
+  const yearEl = document.getElementById('sharePreviewYear');
+  const copyInput = document.getElementById('shareCopyInput');
+
+  if (thumbEl) thumbEl.src = thumb;
+  if (titleEl) titleEl.innerText = title;
+  if (qualityEl) qualityEl.innerText = quality;
+  if (yearEl) yearEl.innerText = year;
+  if (copyInput) copyInput.value = shareUrl;
+
+  const encodedUrl = encodeURIComponent(shareUrl);
+  const encodedText = encodeURIComponent(shareText);
+
+  const whatsappBtn = document.getElementById('shareBtnWhatsapp');
+  const telegramBtn = document.getElementById('shareBtnTelegram');
+  const twitterBtn = document.getElementById('shareBtnTwitter');
+  const facebookBtn = document.getElementById('shareBtnFacebook');
+
+  if (whatsappBtn) whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`;
+  if (telegramBtn) telegramBtn.href = `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`;
+  if (twitterBtn) twitterBtn.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+  if (facebookBtn) facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+  const overlay = document.getElementById('shareOverlay');
+  if (overlay) overlay.classList.add('active');
+}
+
+function nativeSystemShare() {
+  const movie = allMovies.find(m => m.id === currentMovieId) || sampleMovies.find(m => m.id === currentMovieId) || allMovies[0];
+  if (!movie) return;
+
+  const baseUrl = window.location.origin + window.location.pathname;
+  const shareUrl = `${baseUrl}#watch?id=${encodeURIComponent(movie.id)}`;
+  const shareText = `Watch "${movie.title}" in 4K on Xnivo!`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: `${movie.title} — Xnivo`,
+      text: shareText,
+      url: shareUrl
+    }).catch(e => console.log('Native share canceled:', e));
+  } else {
+    copyShareLink();
+  }
+}
+
+function closeShareModal(event) {
+  if (event && event.target && event.target.closest('.share-dialog')) return;
+  const overlay = document.getElementById('shareOverlay');
+  if (overlay) overlay.classList.remove('active');
+}
+
+function copyShareLink() {
+  const copyInput = document.getElementById('shareCopyInput');
+  const urlToCopy = (copyInput && copyInput.value) ? copyInput.value : window.location.href;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(urlToCopy).then(() => {
+      showToast('🔗 Movie streaming link copied to clipboard!');
+    }).catch(() => {
+      legacyCopy(urlToCopy);
+    });
+  } else {
+    legacyCopy(urlToCopy);
+  }
+}
+
+function legacyCopy(text) {
+  const input = document.getElementById('shareCopyInput');
+  if (input) {
+    input.select();
+    document.execCommand('copy');
+    showToast('🔗 Movie streaming link copied to clipboard!');
+  }
+}
+
+function loadRelatedMovies(current) {
+  const grid = document.getElementById('playerMovieGrid');
+  const countEl = document.getElementById('playerFeedCount');
+  if (!grid) return;
+
+  const currentId = current ? current.id : currentMovieId;
+  const feedList = allMovies.filter(m => m.id !== currentId);
+  const finalList = feedList.length > 0 ? feedList : allMovies;
+
+  if (countEl) {
+    countEl.innerText = `${finalList.length} titles`;
+  }
+
+  let html = '';
+  let sponsoredAdCount = 10;
+  let nativeAdCount = 10;
+  finalList.forEach((m, idx) => {
+    html += cardHTML(m);
+    
+    // Inject native video-styled ad (looks like a regular movie video)
+    if (idx === 1 || idx === 4 || (idx > 6 && idx % 3 === 0)) {
+      html += nativeMovieAdCardHTML(nativeAdCount);
+      nativeAdCount++;
+    }
+
+    // Inject real Adsterra SPONSORED ad card
+    if (idx === 3 || idx === 7 || (idx > 7 && (idx - 3) % 5 === 0)) {
+      html += adCardHTML(sponsoredAdCount);
+      sponsoredAdCount++;
+    }
+  });
+
+  grid.innerHTML = html;
+}
+
+// ====== RECENT SEARCHES (LAST 5 IN LOCALSTORAGE) ======
+const RECENT_SEARCHES_KEY = 'xnivo_recent_searches';
+
+function getRecentSearches() {
+  try {
+    const data = localStorage.getItem(RECENT_SEARCHES_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveRecentSearch(query) {
+  if (!query || !query.trim()) return;
+  const trimmed = query.trim();
+  let searches = getRecentSearches();
+  
+  // Filter out duplicate
+  searches = searches.filter(s => s.toLowerCase() !== trimmed.toLowerCase());
+  
+  // Add to beginning
+  searches.unshift(trimmed);
+  
+  // Cap at 5
+  if (searches.length > 5) {
+    searches = searches.slice(0, 5);
+  }
+  
+  try {
+    localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(searches));
+  } catch (e) {}
+  
+  renderRecentSearchesDropdown();
+}
+
+function removeRecentSearch(event, query) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  let searches = getRecentSearches();
+  searches = searches.filter(s => s !== query);
+  try {
+    localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(searches));
+  } catch (e) {}
+  renderRecentSearchesDropdown();
+}
+
+function clearAllRecentSearches(event) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  try {
+    localStorage.removeItem(RECENT_SEARCHES_KEY);
+  } catch (e) {}
+  renderRecentSearchesDropdown();
+  showToast('Search history cleared');
+}
+
+function selectRecentSearch(query) {
+  const input = document.getElementById('searchInput');
+  if (input) {
+    input.value = query;
+    if (searchClearBtn) searchClearBtn.style.display = 'block';
+    saveRecentSearch(query);
+    applyFilters();
+    hideRecentSearchesDropdown();
+  }
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+function renderRecentSearchesDropdown() {
+  const dropdown = document.getElementById('recentSearchesDropdown');
+  const list = document.getElementById('recentSearchesList');
+  if (!dropdown || !list) return;
+  
+  const searches = getRecentSearches();
+  
+  if (searches.length === 0) {
+    list.innerHTML = `
+      <div class="recent-searches-empty">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>No recent searches yet</span>
+      </div>
+    `;
+    return;
+  }
+  
+  list.innerHTML = searches.map(q => `
+    <div class="recent-search-item" onclick="selectRecentSearch('${escapeHtml(q)}')">
+      <div class="recent-search-query-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span class="recent-search-text">${escapeHtml(q)}</span>
+      </div>
+      <button class="recent-search-remove-btn" onclick="removeRecentSearch(event, '${escapeHtml(q)}')" title="Remove">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  `).join('');
+}
+
+function showRecentSearchesDropdown() {
+  renderRecentSearchesDropdown();
+  const dropdown = document.getElementById('recentSearchesDropdown');
+  if (dropdown) dropdown.classList.add('show');
+}
+
+function hideRecentSearchesDropdown() {
+  const dropdown = document.getElementById('recentSearchesDropdown');
+  if (dropdown) dropdown.classList.remove('show');
+}
+
+// ====== SEARCH HANDLING ======
+const searchInput = document.getElementById('searchInput');
+const searchClearBtn = document.getElementById('searchClearBtn');
+
+if (searchInput) {
+  searchInput.addEventListener('focus', () => {
+    showRecentSearchesDropdown();
+  });
+
+  searchInput.addEventListener('click', () => {
+    showRecentSearchesDropdown();
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const q = searchInput.value.trim();
+      if (q) {
+        saveRecentSearch(q);
+        hideRecentSearchesDropdown();
+        searchInput.blur();
+      }
+    }
+  });
+
+  let searchDebounce = null;
+  searchInput.addEventListener('input', function() {
+    const q = this.value.trim();
+    if (searchClearBtn) {
+      searchClearBtn.style.display = q.length > 0 ? 'block' : 'none';
+    }
+    applyFilters();
+
+    if (searchDebounce) clearTimeout(searchDebounce);
+    if (q.length >= 2) {
+      searchDebounce = setTimeout(() => {
+        saveRecentSearch(q);
+      }, 1200);
+    }
+  });
+}
+
+function clearSearch() {
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.focus();
+  }
+  if (searchClearBtn) searchClearBtn.style.display = 'none';
+  applyFilters();
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  const wrap = document.getElementById('searchBoxWrap');
+  if (wrap && !wrap.contains(e.target)) {
+    hideRecentSearchesDropdown();
+  }
+});
+
+// ====== KEYBOARD SHORTCUTS ======
+document.addEventListener('keydown', (e) => {
+  const modal = document.getElementById('playerModal');
+  const shareOverlay = document.getElementById('shareOverlay');
+  const isPlayerActive = modal && modal.classList.contains('active');
+  const isShareActive = shareOverlay && shareOverlay.classList.contains('active');
+
+  if (e.key === 'Escape') {
+    if (isShareActive) {
+      closeShareModal();
+      return;
+    }
+    if (isPlayerActive) {
+      closePlayer();
+      return;
+    }
+    hideRecentSearchesDropdown();
+  }
+
+  if (isPlayerActive && document.activeElement !== searchInput) {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      togglePlayPause();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      skipTime(10);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      skipTime(-10);
+    } else if (e.key === 'f' || e.key === 'F') {
+      e.preventDefault();
+      toggleFullscreen();
+    } else if (e.key === 'm' || e.key === 'M') {
+      e.preventDefault();
+      toggleMute();
+    }
+  }
+});
+
+// ====== TIMED 30-40 SEC INTERVAL SOCIAL BAR CONTROLLER WITH STRICT COOLDOWN ======
+let socialBarTimer = null;
+let isSocialBarInCooldown = false;
+let socialBarCooldownTimeout = null;
+
+function dismissSocialBar(event) {
+  if (event) {
+    event.stopPropagation();
+    if (typeof event.preventDefault === 'function') event.preventDefault();
+  }
+  const widget = document.getElementById('timedSocialBarWidget');
+  if (widget) {
+    widget.classList.remove('active');
+  }
+
+  // Set strict 40-second cooldown lock on close/dismiss!
+  isSocialBarInCooldown = true;
+  if (socialBarCooldownTimeout) clearTimeout(socialBarCooldownTimeout);
+  socialBarCooldownTimeout = setTimeout(() => {
+    isSocialBarInCooldown = false;
+  }, 40000); // 40 seconds strict cooldown guarantee
+}
+
+function handleSocialBarClick(event) {
+  if (event) event.stopPropagation();
+  triggerSmartLink(event);
+  dismissSocialBar(event);
+}
+
+function showTimedSocialBar() {
+  if (isSocialBarInCooldown) return;
+
+  const widget = document.getElementById('timedSocialBarWidget');
+  if (!widget) return;
+
+  // Pop up smoothly
+  widget.classList.add('active');
+
+  // Automatically hide after 6 seconds if not manually closed
+  setTimeout(() => {
+    if (widget && widget.classList.contains('active')) {
+      widget.classList.remove('active');
+    }
+  }, 6000);
+}
+
+function startTimedSocialBarEngine() {
+  if (socialBarTimer) clearInterval(socialBarTimer);
+
+  // Initial single appearance after 10 seconds on visit
+  setTimeout(() => {
+    if (!isSocialBarInCooldown) showTimedSocialBar();
+  }, 10000);
+
+  // Check every 35 seconds
+  socialBarTimer = setInterval(() => {
+    if (!isSocialBarInCooldown) showTimedSocialBar();
+  }, 35000);
+}
+
+// ====== BOOTSTRAP ======
+loadWebsiteData();
+setupHeroSlider();
+applyFilters();
+startTimedSocialBarEngine();
+</script>
+
+</body>
+</html>
